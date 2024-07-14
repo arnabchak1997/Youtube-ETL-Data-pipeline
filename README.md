@@ -51,9 +51,22 @@ A trigger has been created for the lambda function which checks if any new files
 
 Creation of Glue crawler and Spark transformation job for csv data in raw bucket:
 
-A glue crawler Bigadata-on-youtube-raw-raw_statistics-glue-crawler is created which reads the csv files in bigdata-on-youtube-raw-apsouth1-144025787116-dev/youtube/raw_statistics/ and creates a table raw_statistics under database db_youtube_raw in glue catalog. Then , a spark job bigdata-on-youtube-spark-csv-to-parquet has been created which is reading the table raw_statistics and applying transformation on the data and writing them to bucket bigdata-on-youtube-raw-apsouth1-144025787116-dev/youtube/raw_statistics/. 
+A glue crawler Bigadata-on-youtube-raw-raw_statistics-glue-crawler is created which reads the csv files in bigdata-on-youtube-raw-apsouth1-144025787116-dev/youtube/raw_statistics/ and creates a table raw_statistics under database db_youtube_raw in glue catalog. Then , a spark job bigdata-on-youtube-spark-csv-to-parquet has been created which is reading the table raw_statistics and applying transformation on the data and writing them to bucket bigdata-on-youtube-raw-apsouth1-144025787116-dev/youtube/raw_statistics/ in parquet format. 
 
 Another glue crawler Bigadata-on-youtube-cleansed-cleansed_statistics-glue-crawler is created which reads bucket bigdata-on-youtube-raw-apsouth1-144025787116-dev/youtube/raw_statistics/ and creates a table raw_statistics under database db_youtube_cleansed. 
+
+Joining refernce data and statistics data:
+
+In glue catalog, we have the refernce data under table cleansed_statistics_reference_data (created by the lambda function) and statistics data under raw_statistics (created by the glue crawler igadata-on-youtube-cleansed-cleansed_statistics-glue-crawler).
+
+In Glue studio, we create a spark job bigdata-on-youtube-spark-materialized using Visual ETL option to join the data in tables cleansed_statistics_reference_data and raw_statistics based on condition where category_id in raw_statistics = id in cleansed_statistics_reference_data and write the output to reporting layer bucket bigdata-on-youtube-analytics-apsouth1-144025787116-dev/youtube/rpt_youtube_statistics_categories/. Also, it creates a table rpt_youtube_statistics_categories under database db_youtube_analytics and stores the output. The data in both the S3 bucket and catalog is partitioned using region and id fields
+
+![image](https://github.com/user-attachments/assets/f7b6aefa-1ae5-48be-9740-06531ac277be)
+
+Using Quicksight to visualize the data in 
+
+
+
 
 
 
