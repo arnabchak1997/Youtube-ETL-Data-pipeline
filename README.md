@@ -51,7 +51,7 @@ A trigger has been created for the lambda function which checks if any new file 
 
 **Creation of Glue crawler and Spark transformation job for csv data in raw bucket:** <br>
 
-A glue crawler Bigadata-on-youtube-raw-raw_statistics-glue-crawler is created which reads the csv files in bigdata-on-youtube-raw-apsouth1-144025787116-dev/youtube/raw_statistics/ and creates a table raw_statistics under database db_youtube_raw in glue catalog. Then , a spark job bigdata-on-youtube-spark-csv-to-parquet has been created which is reading the table raw_statistics and applying transformation on the data and writing them to bucket bigdata-on-youtube-cleansed-apsouth1-144025787116-dev/youtube/raw_statistics/ in parquet format. 
+A glue crawler Bigadata-on-youtube-raw-raw_statistics-glue-crawler is created which reads the csv files in bigdata-on-youtube-raw-apsouth1-144025787116-dev/youtube/raw_statistics/ and creates a table raw_statistics under database db_youtube_raw in glue catalog. Then , a spark job bigdata-on-youtube-spark-csv-to-parquet has been created which is reading the table raw_statistics and applying transformations like resolvechoice, applymapping and dropnull on the data and writing them to bucket bigdata-on-youtube-cleansed-apsouth1-144025787116-dev/youtube/raw_statistics/ in parquet format. 
 
 Another glue crawler Bigadata-on-youtube-cleansed-cleansed_statistics-glue-crawler is created which reads bucket bigdata-on-youtube-cleansed-apsouth1-144025787116-dev/youtube/raw_statistics/ and creates a table raw_statistics under database db_youtube_cleansed. 
 
