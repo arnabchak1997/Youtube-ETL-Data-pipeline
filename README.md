@@ -19,7 +19,7 @@ Architecture:
 
 Execution Steps:
 
-Creation of S3 buckets:
+**Creation of S3 buckets:**
 For this project, we have created four S3 buckets to store our raw, clenased, analytics data and log files from AWS services used. Below are the four buckets which have been created as part of this project:
 
 ![image](https://github.com/user-attachments/assets/0e799074-7748-4a8f-9f90-e7c049287eb4)
@@ -35,7 +35,7 @@ Using AWS CLI, the raw csv files have been copied to bucket bigdata-on-youtube-r
 
 ![image](https://github.com/user-attachments/assets/5498ba94-ef50-4341-bb22-b676f6192dcc)
 
-Creation of Lambda job to convert json data to parquet format and copying them to cleansed bucket and Glue data catalog:
+**Creation of Lambda job to convert json data to parquet format and copying them to cleansed bucket and Glue data catalog:**
 
 A lambda job has been created which reads the json files from bigdata-on-youtube-raw-apsouth1-144025787116-dev/youtube/raw_statistics_reference_data/ and converts it to parquet format and writes the files to bigdata-on-youtube-cleansed-apsouth1-144025787116-dev/youtube/cleansed_statistics_reference_data/ and to database "db_youtube_cleansed" in Glue data catalog. 
 
@@ -49,13 +49,13 @@ A trigger has been created for the lambda function which checks if any new files
 
 ![image](https://github.com/user-attachments/assets/9e32787b-0ee0-4f96-a475-a99cb0d27101)
 
-Creation of Glue crawler and Spark transformation job for csv data in raw bucket:
+**Creation of Glue crawler and Spark transformation job for csv data in raw bucket:**
 
-A glue crawler Bigadata-on-youtube-raw-raw_statistics-glue-crawler is created which reads the csv files in bigdata-on-youtube-raw-apsouth1-144025787116-dev/youtube/raw_statistics/ and creates a table raw_statistics under database db_youtube_raw in glue catalog. Then , a spark job bigdata-on-youtube-spark-csv-to-parquet has been created which is reading the table raw_statistics and applying transformation on the data and writing them to bucket bigdata-on-youtube-raw-apsouth1-144025787116-dev/youtube/raw_statistics/ in parquet format. 
+A glue crawler Bigadata-on-youtube-raw-raw_statistics-glue-crawler is created which reads the csv files in bigdata-on-youtube-raw-apsouth1-144025787116-dev/youtube/raw_statistics/ and creates a table raw_statistics under database db_youtube_raw in glue catalog. Then , a spark job bigdata-on-youtube-spark-csv-to-parquet has been created which is reading the table raw_statistics and applying transformation on the data and writing them to bucket bigdata-on-youtube-cleansed-apsouth1-144025787116-dev/youtube/raw_statistics/ in parquet format. 
 
-Another glue crawler Bigadata-on-youtube-cleansed-cleansed_statistics-glue-crawler is created which reads bucket bigdata-on-youtube-raw-apsouth1-144025787116-dev/youtube/raw_statistics/ and creates a table raw_statistics under database db_youtube_cleansed. 
+Another glue crawler Bigadata-on-youtube-cleansed-cleansed_statistics-glue-crawler is created which reads bucket bigdata-on-youtube-cleansed-apsouth1-144025787116-dev/youtube/raw_statistics/ and creates a table raw_statistics under database db_youtube_cleansed. 
 
-Joining refernce data and statistics data:
+**Joining refernce data and statistics data:**
 
 In glue catalog, we have the refernce data under table cleansed_statistics_reference_data (created by the lambda function) and statistics data under raw_statistics (created by the glue crawler igadata-on-youtube-cleansed-cleansed_statistics-glue-crawler).
 
