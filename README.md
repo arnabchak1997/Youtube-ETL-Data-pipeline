@@ -10,7 +10,7 @@ are among the items included in the data. A category_id field, which differs by 
 also included in the JSON file linked to the region.
 
 Tech Stack:
-Languages: SQL, Python (Pandas, PySpark)
+Languages: SQL, Python (Pandas, PySpark) <br>
 Services: AWS S3, AWS Glue, QuickSight, AWS Lambda, AWS Athena, AWS IAM
 
 Architecture:
@@ -63,7 +63,7 @@ In Glue studio, we create a spark job bigdata-on-youtube-spark-materialized usin
 
 ![image](https://github.com/user-attachments/assets/f7b6aefa-1ae5-48be-9740-06531ac277be)
 
-Using Quicksight to visualize the data in 
+Using Quicksight to visualize the data
 
 
 
