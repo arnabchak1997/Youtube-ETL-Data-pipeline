@@ -63,7 +63,7 @@ In Glue studio, we create a spark job bigdata-on-youtube-spark-materialized usin
 
 ![image](https://github.com/user-attachments/assets/f7b6aefa-1ae5-48be-9740-06531ac277be)
 
-**Using Quicksight to visualize: ** <br>
+**Using Quicksight to visualize:** <br>
 Since we now have our data joined in table rpt_youtube_statistics_categories, we can query it using Athena and visualize it using Quicksight. For visualization , we create a new dataset using table rpt_youtube_statistics_categories selecting Athena as the source in Quicksight. Once our dataset is created, we are using it to create visuals and publish them to create out dashboard. <br>
 Below are some of the some visualizations created from the rpt_youtube_statistics_categories. <br>
 
